@@ -1,0 +1,34 @@
+package:
+  name: shapeit
+  version: '2.r837'
+
+about:
+  home: http://shapeit.fr/
+  license: free for academic use only
+  summary: a fast and accurate method for estimation of haplotypes (aka phasing) from genotype or sequencing data
+  # The license file in the Linux-specific tar file is broken, so we provide
+  # our own copy extracted from the OS-X-specific tar file.
+  license_file: {{ RECIPE_DIR }}/LICENCE  # [linux]
+  license_file: LICENCE  # [osx]
+
+source:
+  fn: shapeit.v2.r837.GLIBCv2.12.Linux.static.tgz  # [linux]
+  url: https://mathgen.stats.ox.ac.uk/genetics_software/shapeit/shapeit.v2.r837.GLIBCv2.12.Linux.static.tgz  # [linux]
+  md5: d778d2e6963a5fdbf4edb1f2dafa9f63  # [linux]
+  fn: shapeit.v2.r837.MacOSX.tgz  # [osx]
+  url: https://mathgen.stats.ox.ac.uk/genetics_software/shapeit/shapeit.v2.r837.MacOSX.tgz  # [osx]
+  md5: e356a35bc7a627e670da6dc9cab961d3  # [osx]
+
+requirements:
+  run:
+    - boost     # [osx]
+    - libgcc    # [not osx]
+
+build:
+  number: 0
+  skip: False
+  script: mkdir -p ${PREFIX}/bin && mv bin/shapeit ${PREFIX}/bin/
+
+test:
+  commands:
+    - shapeit --version > /dev/null
